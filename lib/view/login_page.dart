@@ -67,23 +67,7 @@ class _LoginPageState extends State<LoginPage> {
                             )
                           : ElevatedButton(
                               onPressed: () {
-                                context.hideKeyBoard();
-                                String userName =
-                                    userNameController.text.trim();
-                                String password =
-                                    passwordController.text.trim();
-                                if (userName.isEmpty || password.isEmpty) {
-                                  showErrorToast(
-                                    message: "Please fill all fields",
-                                  );
-                                  return;
-                                }
-                                context.bloc<AuthBloc>().add(
-                                      LoginEvent(
-                                        username: userName,
-                                        password: password,
-                                      ),
-                                    );
+                                login();
                               },
                               child: const Text('Login'),
                             ),
@@ -103,5 +87,23 @@ class _LoginPageState extends State<LoginPage> {
         },
       ),
     );
+  }
+
+  void login() {
+    context.hideKeyBoard();
+    String userName = userNameController.text.trim();
+    String password = passwordController.text.trim();
+    if (userName.isEmpty || password.isEmpty) {
+      showErrorToast(
+        message: "Please fill all fields",
+      );
+      return;
+    }
+    context.bloc<AuthBloc>().add(
+          LoginEvent(
+            username: userName,
+            password: password,
+          ),
+        );
   }
 }

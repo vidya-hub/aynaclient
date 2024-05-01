@@ -1,7 +1,4 @@
 // ignore_for_file: use_build_context_synchronously
-
-import 'dart:developer';
-
 import 'package:aynaclient/bloc/socket_cubit/socket_cubit.dart';
 import 'package:aynaclient/bloc/socket_cubit/socket_state.dart';
 import 'package:aynaclient/service/hive_service.dart';
@@ -101,10 +98,7 @@ class _HomePageState extends State<HomePage> {
                   child: TextField(
                     controller: _messageController,
                     onSubmitted: (value) {
-                      if (value.isNotEmpty) {
-                        context.bloc<SocketCubit>().send(value);
-                        _messageController.clear();
-                      }
+                      sendMessage();
                     },
                     decoration: const InputDecoration(
                       labelText: 'Enter a message',
@@ -114,11 +108,7 @@ class _HomePageState extends State<HomePage> {
                 20.hSpace,
                 ElevatedButton(
                   onPressed: () {
-                    final message = _messageController.text.trim();
-                    if (message.isNotEmpty) {
-                      context.bloc<SocketCubit>().send(message);
-                      _messageController.clear();
-                    }
+                    sendMessage();
                   },
                   child: const Icon(Icons.send),
                 ),
@@ -128,5 +118,13 @@ class _HomePageState extends State<HomePage> {
         ),
       ),
     );
+  }
+
+  void sendMessage() {
+    final message = _messageController.text.trim();
+    if (message.isNotEmpty) {
+      context.bloc<SocketCubit>().send(message);
+      _messageController.clear();
+    }
   }
 }
