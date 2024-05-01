@@ -1,6 +1,4 @@
-import 'dart:html' as html;
 import 'dart:io';
-import 'package:flutter/foundation.dart';
 import 'package:hive/hive.dart';
 import 'package:path_provider/path_provider.dart' as path_provider;
 import 'package:aynaclient/model/user_model.dart';
@@ -26,10 +24,6 @@ class HiveService {
   }
 
   static Future<Directory> getDirectory() async {
-    if (kIsWeb) {
-      return Directory(html.window.navigator.vendor);
-    }
-
     return await path_provider.getApplicationDocumentsDirectory();
   }
 

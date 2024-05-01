@@ -74,6 +74,7 @@ class RegisterPage extends StatelessWidget {
                             },
                             child: const Text('Register'),
                           ),
+                    20.vSpace,
                     TextButton(
                       onPressed: () {
                         context.pop();

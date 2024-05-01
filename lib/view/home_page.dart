@@ -82,6 +82,7 @@ class _HomePageState extends State<HomePage> {
                           child: Text("Messages Are Empty"),
                         )
                       : ListView.builder(
+                          controller: _scrollController,
                           itemCount: state.messages.length,
                           itemBuilder: (context, index) {
                             return ChatBubble(
