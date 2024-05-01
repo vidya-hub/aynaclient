@@ -1,7 +1,4 @@
 // ignore_for_file: use_build_context_synchronously
-
-import 'dart:developer';
-
 import 'package:aynaclient/bloc/socket_cubit/socket_cubit.dart';
 import 'package:aynaclient/bloc/socket_cubit/socket_state.dart';
 import 'package:aynaclient/service/hive_service.dart';
