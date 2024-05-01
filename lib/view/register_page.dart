@@ -56,21 +56,7 @@ class RegisterPage extends StatelessWidget {
                           )
                         : ElevatedButton(
                             onPressed: () {
-                              context.hideKeyBoard();
-                              String userName = userNameController.text.trim();
-                              String password = passwordController.text.trim();
-                              if (userName.isEmpty || password.isEmpty) {
-                                showErrorToast(
-                                  message: "Please fill all fields",
-                                );
-                                return;
-                              }
-                              context.bloc<AuthBloc>().add(
-                                    RegisterEvent(
-                                      username: userName,
-                                      password: password,
-                                    ),
-                                  );
+                              register(context: context);
                             },
                             child: const Text('Register'),
                           ),
@@ -88,5 +74,25 @@ class RegisterPage extends StatelessWidget {
         },
       ),
     );
+  }
+
+  void register({
+    required BuildContext context,
+  }) {
+    context.hideKeyBoard();
+    String userName = userNameController.text.trim();
+    String password = passwordController.text.trim();
+    if (userName.isEmpty || password.isEmpty) {
+      showErrorToast(
+        message: "Please fill all fields",
+      );
+      return;
+    }
+    context.bloc<AuthBloc>().add(
+          RegisterEvent(
+            username: userName,
+            password: password,
+          ),
+        );
   }
 }

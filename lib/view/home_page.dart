@@ -98,10 +98,7 @@ class _HomePageState extends State<HomePage> {
                   child: TextField(
                     controller: _messageController,
                     onSubmitted: (value) {
-                      if (value.isNotEmpty) {
-                        context.bloc<SocketCubit>().send(value);
-                        _messageController.clear();
-                      }
+                      sendMessage();
                     },
                     decoration: const InputDecoration(
                       labelText: 'Enter a message',
@@ -111,11 +108,7 @@ class _HomePageState extends State<HomePage> {
                 20.hSpace,
                 ElevatedButton(
                   onPressed: () {
-                    final message = _messageController.text.trim();
-                    if (message.isNotEmpty) {
-                      context.bloc<SocketCubit>().send(message);
-                      _messageController.clear();
-                    }
+                    sendMessage();
                   },
                   child: const Icon(Icons.send),
                 ),
@@ -125,5 +118,13 @@ class _HomePageState extends State<HomePage> {
         ),
       ),
     );
+  }
+
+  void sendMessage() {
+    final message = _messageController.text.trim();
+    if (message.isNotEmpty) {
+      context.bloc<SocketCubit>().send(message);
+      _messageController.clear();
+    }
   }
 }
